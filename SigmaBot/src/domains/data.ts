@@ -7,7 +7,7 @@ let cachedRaises: any[] = []; // Stores recent raises
 export async function fetchAllRaises(): Promise<any[]> {
   console.log("🔍 [DEBUG] Launching Puppeteer to scrape DeFiLlama Raises...");
 
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({ headless: true }); // 🔹 FIXED: Changed `"new"` to `true`
   const page = await browser.newPage();
 
   try {
@@ -50,3 +50,6 @@ export async function fetchAllRaises(): Promise<any[]> {
 export async function fetchLatestRaise(): Promise<any | null> {
   return cachedRaises.length > 0 ? cachedRaises[0] : null;
 }
+
+// ✅ Ensure functions are properly exported
+export { fetchAllRaises, fetchLatestRaise }; // 🔹 FIXED: Removed duplicate export declarations
